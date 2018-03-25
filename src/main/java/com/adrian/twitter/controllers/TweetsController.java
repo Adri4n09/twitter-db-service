@@ -25,4 +25,9 @@ public class TweetsController {
     public ResponseEntity<List<Tweet>> getAllTweets() {
         return new ResponseEntity<>(dbOperations.getAllTweets(), HttpStatus.OK);
     }
+
+    @RequestMapping("/getAllText")
+    public ResponseEntity<List<String>> getAllText() {
+        return new ResponseEntity<>(dbOperations.getAllText(), HttpStatus.OK);
+    }
 }

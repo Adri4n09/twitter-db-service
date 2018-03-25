@@ -12,7 +12,7 @@ public interface TweetDao {
 
     void updateTweet(Tweet tweet);
 
-    Tweet getTweet(long id);
+    Tweet getTweet(String id);
 
     List<Tweet> getAllTweets();
 

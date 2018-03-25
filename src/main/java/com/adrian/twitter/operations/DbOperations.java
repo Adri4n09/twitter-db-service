@@ -9,6 +9,8 @@ import org.springframework.social.twitter.api.Tweet;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Component
 @Getter
@@ -30,4 +32,11 @@ public class DbOperations {
         return tweetService.getAllTweets();
     }
 
+    public List<String> getAllText() {
+        return tweetService.getAllTweetsIds()
+                .parallelStream()
+                .map(t -> tweetService.getTweet(t).getText())
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
+    }
 }

@@ -52,8 +52,13 @@ public class TweetDaoImpl implements TweetDao {
     }
 
     @Override
-    public Tweet getTweet(long id) {
-        return mapper.fromJson(bucket.get(String.valueOf(id)).content().toString(), Tweet.class);
+    public Tweet getTweet(String id) {
+        JsonDocument doc = bucket.get(id);
+        if (doc != null)
+            return mapper.fromJson(doc.content().toString(), Tweet.class);
+        else
+            return null;
+        //return mapper.fromJson(bucket.get(id).content().toString(), Tweet.class);
     }
 
     @Override
@@ -69,7 +74,10 @@ public class TweetDaoImpl implements TweetDao {
 
         N1qlQueryResult result = bucket.query(N1qlQuery.simple(SELECT_TWITTER_ID_STR_FROM_TWITTER));
 
-        return result.allRows().stream().map(t -> t.value().getString("idStr")).collect(Collectors.toList());
+        return result.allRows()
+                .parallelStream()
+                .map(t -> t.value().getString("idStr"))
+                .collect(Collectors.toList());
     }
 
     private Function<N1qlQueryRow, Tweet> mapQueryResultToTweet() {

@@ -28,7 +28,7 @@ public class TweetServiceImpl implements TweetService {
     }
 
     @Override
-    public Tweet getTweet(long id) {
+    public Tweet getTweet(String id) {
         return tweetDao.getTweet(id);
     }
 
