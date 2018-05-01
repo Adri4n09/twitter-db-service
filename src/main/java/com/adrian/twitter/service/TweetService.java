@@ -17,4 +17,8 @@ public interface TweetService {
     List<Tweet> getAllTweets();
 
     List<String> getAllTweetsIds();
+
+    Long getNrOfTweets();
+
+    List<String> getFromUserAndText();
 }

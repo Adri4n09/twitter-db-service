@@ -42,6 +42,16 @@ public class TweetServiceImpl implements TweetService {
         return tweetDao.getAllTweetsIds();
     }
 
+    @Override
+    public Long getNrOfTweets() {
+        return tweetDao.getNrOfTweets();
+    }
+
+    @Override
+    public List<String> getFromUserAndText() {
+        return tweetDao.getFromUserAndText();
+    }
+
     @Autowired
     public void setTweetDao(TweetDao tweetDao) {
         this.tweetDao = tweetDao;

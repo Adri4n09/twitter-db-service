@@ -17,4 +17,8 @@ public interface TweetDao {
     List<Tweet> getAllTweets();
 
     List<String> getAllTweetsIds();
+
+    Long getNrOfTweets();
+
+    List<String> getFromUserAndText();
 }
