@@ -74,4 +74,8 @@ public class DbOperations {
     public List<String> getUserAndText() {
         return tweetService.getFromUserAndText();
     }
+
+    public Tweet getTweetById(String id) {
+        return tweetService.getTweet(id);
+    }
 }

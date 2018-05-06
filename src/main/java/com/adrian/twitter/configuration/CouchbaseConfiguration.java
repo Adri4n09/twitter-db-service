@@ -4,6 +4,8 @@ import com.adrian.twitter.utils.MyDateTypeAdapter;
 import com.couchbase.client.java.Bucket;
 import com.couchbase.client.java.Cluster;
 import com.couchbase.client.java.CouchbaseCluster;
+import com.couchbase.client.java.env.CouchbaseEnvironment;
+import com.couchbase.client.java.env.DefaultCouchbaseEnvironment;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -29,7 +31,12 @@ public class CouchbaseConfiguration {
 
     @Bean
     public Cluster cluster() {
-        return CouchbaseCluster.create(cluster);
+        CouchbaseEnvironment couchbaseEnvironment = DefaultCouchbaseEnvironment.builder()
+                .connectTimeout(100000000)
+                .queryTimeout(100000000)
+                .viewTimeout(100000000)
+                .build();
+        return CouchbaseCluster.create(couchbaseEnvironment, cluster);
     }
 
     @Bean

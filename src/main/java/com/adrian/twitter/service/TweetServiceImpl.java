@@ -2,6 +2,7 @@ package com.adrian.twitter.service;
 
 import com.adrian.twitter.dao.TweetDao;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.social.twitter.api.Tweet;
 import org.springframework.stereotype.Service;
 
@@ -28,16 +29,19 @@ public class TweetServiceImpl implements TweetService {
     }
 
     @Override
+    @Cacheable("getTweet")
     public Tweet getTweet(String id) {
         return tweetDao.getTweet(id);
     }
 
     @Override
+    @Cacheable("getAllTweets")
     public List<Tweet> getAllTweets() {
         return tweetDao.getAllTweets();
     }
 
     @Override
+    @Cacheable("getAllTweetsId")
     public List<String> getAllTweetsIds() {
         return tweetDao.getAllTweetsIds();
     }
@@ -48,6 +52,7 @@ public class TweetServiceImpl implements TweetService {
     }
 
     @Override
+    @Cacheable("getFromUserAndText")
     public List<String> getFromUserAndText() {
         return tweetDao.getFromUserAndText();
     }
